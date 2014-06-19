@@ -1,0 +1,175 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CLIENT", "CLIENT", "{E53548FB-C51F-4FA4-9000-10A24866C7C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SERVER", "SERVER", "{5D14CAEF-0B22-48C1-996B-806587C0A7C6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{888648CD-EEFF-45DD-9D65-990DCA0F54FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APLPromoter.Client", "APLPromoter.Client\APLPromoter.Client.csproj", "{B77FE627-BDBC-4848-8C17-3A0E13BC81E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APLPromoter.Client.Contracts", "APLPromoter.Client.Contracts\APLPromoter.Client.Contracts.csproj", "{015B7E94-08C0-49F2-BF6F-C90128514C35}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APLPromoter.Client.Entity", "APLPromoter.Client.Entity\APLPromoter.Client.Entity.csproj", "{CCEF668D-0D12-4649-BD79-ABEE22198699}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APLPromoter.Server.Data", "APLPromoter.Server.Data\APLPromoter.Server.Data.csproj", "{A2F401FA-02DC-40B9-BC57-B2116EDBE8D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APLPromoter.Server.Entity", "APLPromoter.Server.Entity\APLPromoter.Server.Entity.csproj", "{88E4CD34-A479-4077-AC99-8F858FD1E91E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APLPromoter.Server.Services", "APLPromoter.Server.Services\APLPromoter.Server.Services.csproj", "{16FC2049-C250-46B2-A9A3-BAF0C64E9BAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APLPromoter.Server.Services.Contracts", "APLPromoter.Server.Services.Contracts\APLPromoter.Server.Services.Contracts.csproj", "{A5940D20-0105-4037-ACE5-E941EC9EE5A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APLPromoter.Server.Services.Host.Web", "APLPromoter.Server.Services.Host.Web\APLPromoter.Server.Services.Host.Web.csproj", "{202A86F9-730B-46A3-A043-327B5CECB469}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APLPromoter.UI.Wpf", "APLPromoter.UI.Wpf\APLPromoter.UI.Wpf.csproj", "{5964527B-A8A5-4527-85E1-A65482E8C703}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APLPromoter.Core", "APLPromoter.Core\APLPromoter.Core.csproj", "{642154A5-2A2B-4EA3-B7F1-DA75FA9B5C32}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://apl02:8080/tfs/apl%20source%20control
+		SccProjectUniqueName0 = APLPromoter.Core\\APLPromoter.Core.csproj
+		SccProjectName0 = APLPromoter.Core
+		SccAuxPath0 = http://apl02:8080/tfs/apl%20source%20control
+		SccLocalPath0 = APLPromoter.Core
+		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName1 = APLPromoter.Client.Entity\\APLPromoter.Client.Entity.csproj
+		SccProjectTopLevelParentUniqueName1 = APLPromoter.v4.Source.sln
+		SccProjectName1 = APLPromoter.Client.Entity
+		SccAuxPath1 = http://apl02:8080/tfs/apl%20source%20control
+		SccLocalPath1 = APLPromoter.Client.Entity
+		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName2 = APLPromoter.Client.Contracts\\APLPromoter.Client.Contracts.csproj
+		SccProjectTopLevelParentUniqueName2 = APLPromoter.v4.Source.sln
+		SccProjectName2 = APLPromoter.Client.Contracts
+		SccAuxPath2 = http://apl02:8080/tfs/apl%20source%20control
+		SccLocalPath2 = APLPromoter.Client.Contracts
+		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName3 = APLPromoter.Client\\APLPromoter.Client.csproj
+		SccProjectTopLevelParentUniqueName3 = APLPromoter.v4.Source.sln
+		SccProjectName3 = APLPromoter.Client
+		SccAuxPath3 = http://apl02:8080/tfs/apl%20source%20control
+		SccLocalPath3 = APLPromoter.Client
+		SccProvider3 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName4 = APLPromoter.Server.Entity\\APLPromoter.Server.Entity.csproj
+		SccProjectTopLevelParentUniqueName4 = APLPromoter.v4.Source.sln
+		SccProjectName4 = APLPromoter.Server.Entity
+		SccAuxPath4 = http://apl02:8080/tfs/apl%20source%20control
+		SccLocalPath4 = APLPromoter.Server.Entity
+		SccProvider4 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName5 = APLPromoter.Server.Data\\APLPromoter.Server.Data.csproj
+		SccProjectTopLevelParentUniqueName5 = APLPromoter.v4.Source.sln
+		SccProjectName5 = APLPromoter.Server.Data
+		SccAuxPath5 = http://apl02:8080/tfs/apl%20source%20control
+		SccLocalPath5 = APLPromoter.Server.Data
+		SccProvider5 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName6 = APLPromoter.Server.Services.Contracts\\APLPromoter.Server.Services.Contracts.csproj
+		SccProjectTopLevelParentUniqueName6 = APLPromoter.v4.Source.sln
+		SccProjectName6 = APLPromoter.Server.Services.Contracts
+		SccAuxPath6 = http://apl02:8080/tfs/apl%20source%20control
+		SccLocalPath6 = APLPromoter.Server.Services.Contracts
+		SccProvider6 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName7 = APLPromoter.Server.Services\\APLPromoter.Server.Services.csproj
+		SccProjectTopLevelParentUniqueName7 = APLPromoter.v4.Source.sln
+		SccProjectName7 = APLPromoter.Server.Services
+		SccAuxPath7 = http://apl02:8080/tfs/apl%20source%20control
+		SccLocalPath7 = APLPromoter.Server.Services
+		SccProvider7 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName8 = APLPromoter.Server.Services.Host.Web\\APLPromoter.Server.Services.Host.Web.csproj
+		SccProjectTopLevelParentUniqueName8 = APLPromoter.v4.Source.sln
+		SccProjectName8 = APLPromoter.Server.Services.Host.Web
+		SccAuxPath8 = http://apl02:8080/tfs/apl%20source%20control
+		SccLocalPath8 = APLPromoter.Server.Services.Host.Web
+		SccProvider8 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B77FE627-BDBC-4848-8C17-3A0E13BC81E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B77FE627-BDBC-4848-8C17-3A0E13BC81E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B77FE627-BDBC-4848-8C17-3A0E13BC81E6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B77FE627-BDBC-4848-8C17-3A0E13BC81E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B77FE627-BDBC-4848-8C17-3A0E13BC81E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B77FE627-BDBC-4848-8C17-3A0E13BC81E6}.Release|x86.ActiveCfg = Release|Any CPU
+		{015B7E94-08C0-49F2-BF6F-C90128514C35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{015B7E94-08C0-49F2-BF6F-C90128514C35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{015B7E94-08C0-49F2-BF6F-C90128514C35}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{015B7E94-08C0-49F2-BF6F-C90128514C35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{015B7E94-08C0-49F2-BF6F-C90128514C35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{015B7E94-08C0-49F2-BF6F-C90128514C35}.Release|x86.ActiveCfg = Release|Any CPU
+		{CCEF668D-0D12-4649-BD79-ABEE22198699}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCEF668D-0D12-4649-BD79-ABEE22198699}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCEF668D-0D12-4649-BD79-ABEE22198699}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CCEF668D-0D12-4649-BD79-ABEE22198699}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCEF668D-0D12-4649-BD79-ABEE22198699}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCEF668D-0D12-4649-BD79-ABEE22198699}.Release|x86.ActiveCfg = Release|Any CPU
+		{A2F401FA-02DC-40B9-BC57-B2116EDBE8D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2F401FA-02DC-40B9-BC57-B2116EDBE8D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2F401FA-02DC-40B9-BC57-B2116EDBE8D5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A2F401FA-02DC-40B9-BC57-B2116EDBE8D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2F401FA-02DC-40B9-BC57-B2116EDBE8D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2F401FA-02DC-40B9-BC57-B2116EDBE8D5}.Release|x86.ActiveCfg = Release|Any CPU
+		{88E4CD34-A479-4077-AC99-8F858FD1E91E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88E4CD34-A479-4077-AC99-8F858FD1E91E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88E4CD34-A479-4077-AC99-8F858FD1E91E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{88E4CD34-A479-4077-AC99-8F858FD1E91E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88E4CD34-A479-4077-AC99-8F858FD1E91E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88E4CD34-A479-4077-AC99-8F858FD1E91E}.Release|x86.ActiveCfg = Release|Any CPU
+		{16FC2049-C250-46B2-A9A3-BAF0C64E9BAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16FC2049-C250-46B2-A9A3-BAF0C64E9BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16FC2049-C250-46B2-A9A3-BAF0C64E9BAD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{16FC2049-C250-46B2-A9A3-BAF0C64E9BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16FC2049-C250-46B2-A9A3-BAF0C64E9BAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16FC2049-C250-46B2-A9A3-BAF0C64E9BAD}.Release|x86.ActiveCfg = Release|Any CPU
+		{A5940D20-0105-4037-ACE5-E941EC9EE5A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5940D20-0105-4037-ACE5-E941EC9EE5A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5940D20-0105-4037-ACE5-E941EC9EE5A7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A5940D20-0105-4037-ACE5-E941EC9EE5A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5940D20-0105-4037-ACE5-E941EC9EE5A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5940D20-0105-4037-ACE5-E941EC9EE5A7}.Release|x86.ActiveCfg = Release|Any CPU
+		{202A86F9-730B-46A3-A043-327B5CECB469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{202A86F9-730B-46A3-A043-327B5CECB469}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{202A86F9-730B-46A3-A043-327B5CECB469}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{202A86F9-730B-46A3-A043-327B5CECB469}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{202A86F9-730B-46A3-A043-327B5CECB469}.Release|Any CPU.Build.0 = Release|Any CPU
+		{202A86F9-730B-46A3-A043-327B5CECB469}.Release|x86.ActiveCfg = Release|Any CPU
+		{5964527B-A8A5-4527-85E1-A65482E8C703}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5964527B-A8A5-4527-85E1-A65482E8C703}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5964527B-A8A5-4527-85E1-A65482E8C703}.Debug|x86.ActiveCfg = Debug|x86
+		{5964527B-A8A5-4527-85E1-A65482E8C703}.Debug|x86.Build.0 = Debug|x86
+		{5964527B-A8A5-4527-85E1-A65482E8C703}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5964527B-A8A5-4527-85E1-A65482E8C703}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5964527B-A8A5-4527-85E1-A65482E8C703}.Release|x86.ActiveCfg = Release|x86
+		{5964527B-A8A5-4527-85E1-A65482E8C703}.Release|x86.Build.0 = Release|x86
+		{642154A5-2A2B-4EA3-B7F1-DA75FA9B5C32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{642154A5-2A2B-4EA3-B7F1-DA75FA9B5C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{642154A5-2A2B-4EA3-B7F1-DA75FA9B5C32}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{642154A5-2A2B-4EA3-B7F1-DA75FA9B5C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{642154A5-2A2B-4EA3-B7F1-DA75FA9B5C32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{642154A5-2A2B-4EA3-B7F1-DA75FA9B5C32}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B77FE627-BDBC-4848-8C17-3A0E13BC81E6} = {E53548FB-C51F-4FA4-9000-10A24866C7C3}
+		{015B7E94-08C0-49F2-BF6F-C90128514C35} = {E53548FB-C51F-4FA4-9000-10A24866C7C3}
+		{CCEF668D-0D12-4649-BD79-ABEE22198699} = {E53548FB-C51F-4FA4-9000-10A24866C7C3}
+		{A2F401FA-02DC-40B9-BC57-B2116EDBE8D5} = {5D14CAEF-0B22-48C1-996B-806587C0A7C6}
+		{88E4CD34-A479-4077-AC99-8F858FD1E91E} = {5D14CAEF-0B22-48C1-996B-806587C0A7C6}
+		{16FC2049-C250-46B2-A9A3-BAF0C64E9BAD} = {5D14CAEF-0B22-48C1-996B-806587C0A7C6}
+		{A5940D20-0105-4037-ACE5-E941EC9EE5A7} = {5D14CAEF-0B22-48C1-996B-806587C0A7C6}
+		{202A86F9-730B-46A3-A043-327B5CECB469} = {5D14CAEF-0B22-48C1-996B-806587C0A7C6}
+		{5964527B-A8A5-4527-85E1-A65482E8C703} = {888648CD-EEFF-45DD-9D65-990DCA0F54FC}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,219 @@
+﻿<UserControl	
+	x:Class="APLPromoter.UI.Wpf.PricingFrame"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:views="clr-namespace:APLPromoter.UI.Wpf.Views"
+	xmlns:vm="clr-namespace:APLPromoter.UI.Wpf.ViewModel"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="788"
+	>
+	<UserControl.Resources>
+        <Style TargetType="telerik:RadTileView">
+            <Setter Property="PreservePositionWhenMaximized" Value="True" />
+            <Setter Property="telerik:TileViewPanel.IsVirtualized" Value="True" />
+            <Setter Property="IsAutoScrollingEnabled" Value="True" />
+            <Setter Property="TileStateChangeTrigger" Value="SingleClick" />
+            <Setter Property="MinimizedColumnWidth" Value="150" />
+            <Setter Property="MinimizedRowHeight" Value="150" />
+            <Setter Property="RowHeight" Value="200" />
+            <Setter Property="ColumnWidth" Value="*" />
+            <Setter Property="ColumnsCount" Value="2" />
+            <Setter Property="MaximizeMode" Value="One"/>
+        </Style>
+
+        <DataTemplate x:Key="PricingSteps">
+            <Grid x:Name="LayoutRoot" Background="{x:Null}">
+                <ToggleButton x:Name="StepButton"
+					Style="{DynamicResource StepButtonStyle}"															
+                    Command="{Binding DataContext.SelectedViewModel.ChangeStepCommand, 
+                            RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type views:MainView}}}"
+                    CommandParameter="{Binding}"
+					HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+					Width="160" HorizontalContentAlignment="Stretch" 
+					VerticalContentAlignment="Stretch" Padding="1" 
+					Background="{Binding DataContext.UserSettings.HeaderBrush,
+						RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type views:MainView}},
+						UpdateSourceTrigger=PropertyChanged}" Margin="6,2,6,6" 
+					BorderBrush="{Binding DataContext.UserSettings.BorderBrush,
+						RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type views:MainView}},
+						UpdateSourceTrigger=PropertyChanged}" BorderThickness="1"
+					>
+                    <Grid>
+                        <TextBlock x:Name="StepName" 
+							TextWrapping="Wrap" Text="{Binding Name, FallbackValue=Blah Blah Blah}" 
+							Foreground="{Binding DataContext.UserSettings.TextBrush,
+								RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type views:MainView}},
+								UpdateSourceTrigger=PropertyChanged}" FontSize="{DynamicResource DefaultLabelSize}" Padding="6,4"
+								/>
+                    </Grid>
+                </ToggleButton>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot" Margin="0,-5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="HeaderGrid" Grid.ColumnSpan="2"
+			Height="37" Background="{Binding DataContext.UserSettings.HeaderBrush, 
+				RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+				Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}" 
+			BorderThickness="1" CornerRadius="2" 
+			BorderBrush="{Binding DataContext.UserSettings.BorderBrush, 
+				RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+				Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}" 
+			>
+            <TextBlock x:Name="AnalyticsTextBlock" 
+				HorizontalAlignment="Left" TextWrapping="Wrap" 
+				Text="{Binding HeaderTitle}"
+				FontFamily="{DynamicResource APLDefault}"
+				FontSize="{DynamicResource DefaultHeaderSize}"
+				Foreground="{Binding DataContext.UserSettings.TextBrush, 
+					RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+					Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}" 
+				Margin="8,0,0,0" Padding="0,10,0,0"
+				/>
+        </Border>
+        <Grid x:Name="StepHeader" Grid.Row="1"
+				Background="{Binding DataContext.UserSettings.BackgroundBrush, 
+					RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+					Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}" 
+				Margin="0" MinHeight="30"
+				>
+            <TextBlock x:Name="StepHeaderText" 
+				TextWrapping="Wrap" Text="{Binding StepHeader, FallbackValue=This is the StepName}" 
+				FontFamily="{DynamicResource APLDefault}" 
+				FontSize="{DynamicResource DefaultLabelSize}" 				
+				Foreground="{Binding DataContext.UserSettings.TextBrush, 
+					RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+					Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}" 
+                VerticalAlignment="Center" Margin="4,0"
+				/>
+        </Grid>
+        <Grid x:Name="TileAccessors" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3">
+            <ListBox x:Name="AnalyticView"
+        			Background="{x:Null}" Cursor="Arrow"
+					BorderBrush="{x:Null}"
+        			HorizontalContentAlignment="Stretch"
+        			MaxHeight="{Binding ActualHeight, ElementName=LayoutRoot}"
+        			MaxWidth="{Binding ActualWidth, ElementName=LayoutRoot}"
+        			ItemTemplate="{StaticResource PricingSteps}"
+                    ItemsSource="{Binding Workflow.Steps, FallbackValue=123}"     
+        			ItemContainerStyle="{DynamicResource BlankListBoxItemStyle}"
+        			ItemsPanel="{DynamicResource VerticalWrapPanelLayoutTemplate}"
+        			Style="{DynamicResource ListBoxStyle}" Margin="0" 
+					/>
+        </Grid>
+        <Grid x:Name="PricingView" Background="White" Grid.Row="2" Grid.RowSpan="2">
+            <ContentPresenter Content="{Binding SelectedStepViewModel, UpdateSourceTrigger=PropertyChanged}">
+                <ContentPresenter.Resources>
+                    <DataTemplate x:Key="PricingInfo">
+                        <Grid x:Name="LayoutRoot" Background="{x:Null}" Width="Auto" Height="Auto">
+                            
+                        </Grid>
+                    </DataTemplate>
+                    <DataTemplate x:Key="PricingToo">
+                        <Grid x:Name="LayoutRoot" Width="Auto" Height="Auto">
+
+                        </Grid>
+                    </DataTemplate>
+                </ContentPresenter.Resources>
+            </ContentPresenter>
+
+            <!--<Xaml:RoutedViewHost Router="{Binding Router}"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />-->
+        </Grid>
+        <Grid x:Name="ButtonBank" Grid.Row="4" 
+				Background="{Binding DataContext.UserSettings.BackgroundBrush, 
+					RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+					Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,4"
+					>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="PreviousButton" Grid.Column="1"
+				Content="Previous" Width="75"  Margin="0,6,4,0" BorderThickness="1"
+				Foreground="{Binding DataContext.UserSettings.TextBrush, 
+					RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+					Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
+				Background="{Binding DataContext.UserSettings.HeaderBrush,
+					RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+					Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
+				BorderBrush="{Binding DataContext.UserSettings.BorderBrush, 
+					RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+					Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}" 
+					/>
+            <Button x:Name="SaveButton" Grid.Column="2"
+				Content="Save" Width="75"
+				Foreground="{Binding DataContext.UserSettings.TextBrush, 
+					RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+					Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
+				Background="{Binding DataContext.UserSettings.HeaderBrush, 
+					RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+					Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
+				BorderBrush="{Binding DataContext.UserSettings.BorderBrush, 
+					RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+					Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}" 
+				BorderThickness="1" Margin="0,6,4,0"
+					/>
+            <Button x:Name="CancelButton" Grid.Column="3"
+				Content="Cancel" Width="75"  Margin="0,6,4,0" BorderThickness="1"
+				Foreground="{Binding DataContext.UserSettings.TextBrush, 
+					RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+					Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
+				Background="{Binding DataContext.UserSettings.HeaderBrush, 
+					RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+					Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
+				BorderBrush="{Binding DataContext.UserSettings.BorderBrush, 
+					RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+					Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
+					/>
+            <Button x:Name="ClearButton" Grid.Column="4"
+				Content="Clear" Width="75"  Margin="0,6,4,0" BorderThickness="1"
+				Foreground="{Binding DataContext.UserSettings.TextBrush, 
+					RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+					Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
+				Background="{Binding DataContext.UserSettings.HeaderBrush, 
+					RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+					Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
+				BorderBrush="{Binding DataContext.UserSettings.BorderBrush, 
+					RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+					Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
+					/>
+            <Button x:Name="NextButton" Grid.Column="5"
+				Content="Next" Width="75"  Margin="0,6,0,0" BorderThickness="1"
+				Foreground="{Binding DataContext.UserSettings.TextBrush, 
+					RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+					Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
+				Background="{Binding DataContext.UserSettings.HeaderBrush, 
+					RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+					Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
+				BorderBrush="{Binding DataContext.UserSettings.BorderBrush, 
+					RelativeSource={RelativeSource AncestorType={x:Type views:MainView}, 
+					Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
+					/>
+        </Grid>
+        <Rectangle RadiusY="2" RadiusX="2" Grid.RowSpan="5" Stroke="{Binding DataContext.UserSettings.BorderBrush,
+			  RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type views:MainView}},
+			  UpdateSourceTrigger=PropertyChanged}" StrokeThickness="1" Grid.ColumnSpan="2"
+			  />
+    </Grid>
+</UserControl>

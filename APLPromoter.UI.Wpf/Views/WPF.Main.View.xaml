@@ -1,0 +1,435 @@
+﻿<UserControl
+    x:Class="APLPromoter.UI.Wpf.Views.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:Xaml="clr-namespace:ReactiveUI.Xaml;assembly=ReactiveUI.Xaml"
+    xmlns:views="clr-namespace:APLPromoter.UI.Wpf.Views"
+    xmlns:local="clr-namespace:APLPromoter.UI.Wpf.ViewModel"
+    xmlns:conv="clr-namespace:APLPromoter.UI.Wpf.Converters"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+	xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" 
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="1024" IsTabStop="False"            
+    >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="WPF.Resources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate x:Key="HomeViewDataTemplate" 
+					DataType="{x:Type local:HomeViewModel}"
+					>
+                <views:HomeView/>
+            </DataTemplate>
+<!--TODO: Need to look at AnaliticViewModel-->
+<!--
+            <DataTemplate x:Key="AnalyticViewDataTemplate" 
+					DataType="{x:Type local:AnalyticViewModel}"
+					>
+                <views:AnalyticEditView/>
+            </DataTemplate>
+-->
+	<Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}" >
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="BorderBrush" Value="Black"/>
+		<Setter Property="Background" Value="{x:Null}"/>
+		<Setter Property="Placement" Value="Top"/>
+		<Setter Property="SnapsToDevicePixels" Value="True"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToolTip}">
+					<Grid>
+						<Border 
+							BorderThickness="0.6" Background="#FFFFFFFF" BorderBrush="#FF153874">
+							
+						</Border>
+						<TextBlock 
+							Style="{x:Null}"
+							Text="{TemplateBinding Content}"
+							TextTrimming="None"
+							Margin="15,5" Foreground="#FF000000" TextAlignment="Center" FontSize="12"
+							/>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+            <SolidColorBrush Color="#d6d4d4" x:Key="BorderBrush"/>
+
+            <Style TargetType="{x:Type TextBlock}" x:Key="TitleStyle">
+            	<Setter Property="Foreground" Value="#25a0da" />
+            	<Setter Property="FontSize" Value="16"/>
+            	<Setter Property="FontFamily" Value="/Telerik.Windows.QuickStartUITheme;component/Fonts/MyriadPro-Light.otf#Myriad Pro Light"/>
+            	<Setter Property="Margin" Value="10 5"/>
+            </Style>
+
+            <Style TargetType="{x:Type TextBlock}" x:Key="lefttext_style">
+            	<Setter Property="Foreground" Value="#1fa3eb"/>
+            	<Setter Property="FontSize" Value="11"/>
+            	<Setter Property="Margin" Value="0 2 0 5"/>
+            	<Setter Property="HorizontalAlignment" Value="Left"/>
+            	<Setter Property="VerticalAlignment" Value="Top"/>
+            	<Setter Property="FontFamily" Value="/Telerik.Windows.QuickStartUITheme;component/Fonts/MyriadPro-Light.otf#Myriad Pro Light"/>
+            </Style>
+
+            <Style TargetType="{x:Type TextBlock}" x:Key="righttext_style">
+            	<Setter Property="Foreground" Value="#333333"/>
+            	<Setter Property="FontSize" Value="12"/>
+            	<Setter Property="Margin" Value="0 0 0 4"/>
+            	<Setter Property="HorizontalAlignment" Value="Left"/>
+            	<Setter Property="VerticalAlignment" Value="Top"/>
+            	<Setter Property="FontWeight" Value="Light"/>
+            </Style>
+
+            <Style TargetType="{x:Type Border}" x:Key="separator_style">
+            	<Setter Property="BorderBrush" Value="{DynamicResource APL-ItemPending}"/>
+            	<Setter Property="Background" Value="{DynamicResource APL-ItemHeader}"/>
+            	<Setter Property="BorderThickness" Value="0 0 0 1"/>
+            	<Setter Property="Height" Value="2"/>
+            	<Setter Property="Margin" Value="0 10"/>
+            </Style>
+
+            <DataTemplate x:Key="validationErrorItemTemplate">
+            	<Border x:Name="ValidationErrorBorder" 
+					BorderThickness="1" CornerRadius="2" 
+					BorderBrush="{x:Null}" Margin="2" Width="Auto"
+					HorizontalAlignment="Stretch"
+					>
+            		<TextBlock x:Name="ValidationErrorTextBlock" 
+						Text="{Binding ErrorMessage, FallbackValue=invalid}" 
+						TextWrapping="Wrap" TextTrimming="WordEllipsis" 
+						Margin="2" Foreground="Red"
+						Width="Auto" HorizontalAlignment="Stretch"
+						/>
+            	</Border>
+            </DataTemplate>
+
+            <DataTemplate x:Key="AnalyticTemplate">
+            	<StackPanel>
+            		<TextBlock Text="{Binding Description}"/>
+            		<TextBlock Text="{Binding Id}"/>
+            		<TextBlock Text="{Binding Name}"/>
+            	</StackPanel>
+            </DataTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>	
+
+	<Grid x:Name="LayoutRoot">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="35"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<telerik:RadDocking x:Name="MainRadDocking" Grid.Row="1"
+			PreviewShowCompass="MessageCenterDocking_OnPreviewShowCompass" 
+			Background="{Binding UserSettings.BackgroundBrush, UpdateSourceTrigger=PropertyChanged}" 
+			BorderBrush="{Binding DataContext.UserSettings.BorderBrush,
+			RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type views:MainView}},
+            UpdateSourceTrigger=PropertyChanged}" 
+			telerik:RadDocking.FloatingWindowState="Normal"			
+			>
+			<telerik:RadDocking.DocumentHost>
+                <telerik:RadSplitContainer IsTabStop="False"
+					>
+                    <telerik:RadPaneGroup IsTabStop="False" 
+						Background="{x:Null}" BorderBrush="{x:Null}" 
+						DocumentHostTemplate="{DynamicResource RadPaneGroupControlTemplate1}" Margin="-6,0"
+						>
+                        <telerik:RadDocumentPane IsTabStop="False" Title="Analytic Detail" 
+							CanUserPin="False" CanUserClose="False" CanFloat="False" 
+							VerticalAlignment="Top" PaneHeaderVisibility="Collapsed" 
+							Visibility="Collapsed" Background="{x:Null}"                                                 
+							>
+                            <Xaml:ViewModelViewHost x:Name="xDetailView"  
+								VerticalAlignment="Stretch" IsTabStop="False" Width="Auto" Height="Auto"
+								ViewModel="{Binding SelectedViewModel, UpdateSourceTrigger=PropertyChanged}" 
+								HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+								/>
+                        </telerik:RadDocumentPane>
+					</telerik:RadPaneGroup>
+				</telerik:RadSplitContainer>
+			</telerik:RadDocking.DocumentHost>
+	
+			<i:Interaction.Triggers>
+				<i:EventTrigger EventName="MouseLeftButtonDown">
+					<i:InvokeCommandAction Command="{Binding Navigate}"/>
+				</i:EventTrigger>
+			</i:Interaction.Triggers>
+
+			<telerik:RadSplitContainer x:Name="ExplorerContainer" 
+				InitialPosition="DockedLeft" Width="Auto"
+				telerik:DockingPanel.InitialSize="300, 768"                
+				>
+				<telerik:RadPaneGroup x:Name="ExplorerRadPaneGroup" 
+					Background="White"  BorderThickness="1"
+					BorderBrush="{Binding DataContext.UserSettings.BorderBrush,
+					RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type views:MainView}},
+					UpdateSourceTrigger=PropertyChanged}"
+					>
+					<telerik:RadPane x:Name="ExplorerRadPane" 
+						Header="{Binding UserGreeting}" CanFloat="False" 
+						CanUserClose="False" CanDockInDocumentHost="False"  						 
+						Visibility="Visible" BorderBrush="{x:Null}" IsPinned="True" 
+                        IsTabStop="False" KeyboardNavigation.TabNavigation="None"
+						>
+						 <telerik:RadPane.ContextMenuTemplate>
+							<DataTemplate>
+								<telerik:RadContextMenu>
+										<telerik:RadMenuItem Header="Auto Hide" Command="telerik:RadDockingCommands.Pin"/>
+								</telerik:RadContextMenu>
+							</DataTemplate>
+						</telerik:RadPane.ContextMenuTemplate>
+                        <StackPanel>
+                            <ItemsControl x:Name="ExplorerItemsControl"
+                                      ItemsSource="{Binding ExplorerViewModel.Explorers}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Expander x:Name="ExpanderElement"											  
+							                Header="{Binding Title}" IsExpanded="{Binding IsExpanded}" 
+							                Style="{DynamicResource ExplorerExpanderStyle}"                                                											   
+							                >
+                                            <Expander.Content>
+                                                <TreeView x:Name="xTreeView"                                                            
+									                Height="{Binding Converter={StaticResource ExplorerLengthConverter},FallbackValue=768}"
+									                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+									                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+									                Background="{x:Null}" Foreground="Black" FontFamily="{DynamicResource APLDefault}"
+									                ItemsSource="{Binding Navigators}" FontSize="{DynamicResource DefaultTextSize}"
+									                ItemTemplate="{StaticResource NavigatorTemplate}"
+                                                    SelectedItemChanged="xTreeView_SelectedItemChanged" 
+													BorderBrush="{x:Null}" ItemContainerStyle="{DynamicResource TreeViewItemStyle}"
+									                />
+                                            </Expander.Content>
+                                        </Expander>
+                                    </DataTemplate>                                    
+                                </ItemsControl.ItemTemplate>                                                                
+                            </ItemsControl>
+                        </StackPanel>
+					</telerik:RadPane>
+				</telerik:RadPaneGroup>
+			</telerik:RadSplitContainer>
+            
+            <telerik:RadSplitContainer x:Name="RightContainer"				 
+				SizeChanged="RadPane_SizeChanged" InitialPosition="DockedRight" 
+				telerik:DockingPanel.InitialSize="300,768" 
+				RenderTransformOrigin="1.5,0.5" Visibility="Visible"
+                IsTabStop="False" KeyboardNavigation.TabNavigation="None"
+				telerik:RadDocking.FloatingSize="350,728"
+				telerik:RadDocking.FloatingLocation="1340,180" 
+				>
+				<telerik:RadSplitContainer.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</telerik:RadSplitContainer.RenderTransform>
+				
+				<telerik:RadPaneGroup x:Name="MessageCenterPaneGroup"
+                    SizeChanged="RadPane_SizeChanged"
+					Background="{x:Null}"  
+					BorderThickness="1" HeaderBackground="{x:Null}"
+					BorderBrush="{Binding DataContext.UserSettings.BorderBrush,
+					RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type views:MainView}},
+					UpdateSourceTrigger=PropertyChanged}"
+					>
+                    <telerik:RadPane x:Name="RightPane" DataContext="{Binding}"						
+						SizeChanged="RadPane_SizeChanged" Header="{Binding MessageCenterTitle, UpdateSourceTrigger=PropertyChanged}" 
+						IsPinned="{Binding SelectedViewModel.HasMessageAlert}" 
+						CanFloat="True" CanUserClose="False" CanDockInDocumentHost="false"                        
+                        IsHidden="{Binding SelectedViewModel.Workflow, Converter={StaticResource nullToBoolConverter}, 
+							UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+							>
+							<telerik:RadPane.ContextMenuTemplate>
+								<DataTemplate>
+									<telerik:RadContextMenu>
+										<telerik:RadMenuItem Header="Float" Command="telerik:RadDockingCommands.Floating"/>
+										<telerik:RadMenuItem Header="Dock" Command="telerik:RadDockingCommands.Dockable"/>
+										<telerik:RadMenuItem Header="Auto Hide" Command="telerik:RadDockingCommands.Pin"/>
+
+									</telerik:RadContextMenu>
+								</DataTemplate>
+							</telerik:RadPane.ContextMenuTemplate>
+							<ItemsControl x:Name="itemsControl"
+								Background="White"
+								ItemsSource="{Binding SelectedViewModel.Workflow.Steps}" 							
+								>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Expander x:Name="MessageCenterExpander"  
+										Header="{Binding Name}" 
+										IsExpanded="{Binding IsActive}" Expanded="Expander_Expanded"
+										FontFamily="{DynamicResource APLDefault}" 
+										FontSize="{DynamicResource DefaultHeaderSize}"   
+										Style="{DynamicResource MessageCenterExpanderStyle}"                                        
+										IsHitTestVisible="False" IsTabStop="False"                                              
+                                        KeyboardNavigation.TabNavigation="None"
+										>
+                                        <Expander.Content>                                            
+                                            <StackPanel x:Name="stack" 
+												Height="{Binding DataContext.SelectedViewModel.Workflow, 
+												RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged, 
+													Converter={StaticResource stackHeightConverter}}"
+													>                                                    
+                                                <Label x:Name="ErrorsLabel" 
+													Content="Errors" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+													Visibility="{Binding Errors, Converter={StaticResource EmptyListConverter}}" 
+                                                    Background="White" FontWeight="Medium" Foreground="Red"
+													FontSize="{DynamicResource DefaultLabelSize}" 
+													FontFamily="{DynamicResource APLDefault}"													 
+													/>
+                                                <Label x:Name="ValidationErrosLabel"  
+													Background="White"  FontWeight="Medium" Foreground="Red"
+													FontSize="{DynamicResource DefaultLabelSize}" 
+													FontFamily="{DynamicResource APLDefault}"
+													Content="Errors" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+													Visibility="{Binding DataContext.SelectedViewModel.ValidationErrors, Converter={StaticResource EmptyListConverter}, 
+														RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"                                                    
+														/>
+                                                <ListView x:Name="ValidationListView" Grid.Row="1"
+                                            		IsHitTestVisible="False" Background="White" BorderBrush="{x:Null}" 
+                                            		ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+                                            		ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+													FontSize="{DynamicResource DefaultTextSize}" 
+													FontFamily="{DynamicResource APLDefault}"
+                                            		ItemsSource="{Binding DataContext.SelectedViewModel.ValidationErrors, 
+                                                    RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"                                           
+                                            		ItemTemplate="{StaticResource validationErrorItemTemplate}" Foreground="Red"
+                                            		Visibility="{Binding DataContext.SelectedViewModel.ValidationErrors, Converter={StaticResource EmptyListConverter}, 
+														RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+														/>                             
+                                            	<ListView x:Name="ErrorsListView" Grid.Row="2"
+                                            		Background="#FFFFFFFF" BorderBrush="{x:Null}" Foreground="Red"
+                                            		ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+                                            		ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+													FontSize="{DynamicResource DefaultTextSize}" 
+													FontFamily="{DynamicResource APLDefault}"
+                                            		Style="{StaticResource ActiveToggleStyle}" IsHitTestVisible="False"                
+                                            		ItemsSource="{Binding Errors}" ItemTemplate="{DynamicResource error}"                                            		
+				                                    Visibility="{Binding Errors, Converter={StaticResource EmptyListConverter}}"													 
+													/>
+												<Label x:Name="AdvisiorsLabel" 
+													Content="Advisors" FontWeight="Medium" Background="White"
+													HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+													FontSize="{DynamicResource DefaultLabelSize}" 
+													FontFamily="{DynamicResource APLDefault}"									 
+													/>
+                                            	<ListView x:Name="AdvisorsListView" Grid.Row="3"
+                                            		IsHitTestVisible="False" Background="White" BorderBrush="{x:Null}"                                            		 
+                                            		ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+                                            		ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+													FontSize="{DynamicResource DefaultTextSize}" 
+													FontFamily="{DynamicResource APLDefault}"
+                                            		ItemsSource="{Binding Advisors}" ItemTemplate="{DynamicResource advisor}"                                            		
+                                                    />                                                
+                                            </StackPanel>                                            
+                                        </Expander.Content>
+                                    </Expander>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </telerik:RadPane>
+                    <telerik:RadPane x:Name="PropertiesPane" DataContext="{Binding}"						
+                    	SizeChanged="RadPane_SizeChanged" Header="Properties" 
+                    	IsPinned="{Binding SelectedViewModel.HasMessageAlert}" 
+                    	CanFloat="True" CanUserClose="False" CanDockInDocumentHost="false"                        
+                    	IsHidden="{Binding SelectedViewModel.Workflow, Converter={StaticResource nullToBoolConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+							Margin="0,0,0,-2" 
+							>
+                    	<telerik:RadPane.ContextMenuTemplate>
+                    		<DataTemplate>
+                    			<telerik:RadContextMenu>
+                    				<telerik:RadMenuItem Header="Float" Command="telerik:RadDockingCommands.Floating"/>
+                    				<telerik:RadMenuItem Header="Dock" Command="telerik:RadDockingCommands.Dockable"/>
+                    				<telerik:RadMenuItem Header="Auto Hide" Command="telerik:RadDockingCommands.Pin"/>
+
+                    			</telerik:RadContextMenu>
+                    		</DataTemplate>
+                    	</telerik:RadPane.ContextMenuTemplate>
+                    	<ItemsControl x:Name="itemsControl1"
+                    		Background="White"
+                    		ItemsSource="{Binding SelectedViewModel.Workflow.Steps}" 							
+								>
+                    		<ItemsControl.ItemTemplate>
+                    			<DataTemplate>
+                    				<Expander x:Name="PropertiesExpander"  
+                    					Header="{Binding Name}" 
+                    					IsExpanded="{Binding IsActive}" Expanded="Expander_Expanded"
+                    					FontFamily="{DynamicResource APLDefault}" 
+                    					FontSize="{DynamicResource DefaultHeaderSize}"   
+                    					Style="{DynamicResource MessageCenterExpanderStyle}"                                        
+                    					IsHitTestVisible="False" IsTabStop="False"                                              
+                    					KeyboardNavigation.TabNavigation="None"
+										>                                            
+                    					<!--<StackPanel x:Name="stack" 
+                    						Height="{Binding DataContext.SelectedViewModel.Workflow, Converter={StaticResource stackHeightConverter}, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged}"
+													>                                                    
+                    						<Label x:Name="ErrorsLabel" 
+                    							Content="Errors" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    							Visibility="{Binding Errors, Converter={StaticResource EmptyListConverter}}" 
+                    							Background="White" FontWeight="Medium" Foreground="Red"
+                    							FontSize="{DynamicResource DefaultLabelSize}" 
+                    							FontFamily="{DynamicResource APLDefault}"													 
+													/>
+                    						<Label x:Name="ValidationErrosLabel"  
+                    							Background="White"  FontWeight="Medium" Foreground="Red"
+                    							FontSize="{DynamicResource DefaultLabelSize}" 
+                    							FontFamily="{DynamicResource APLDefault}"
+                    							Content="Errors" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    							Visibility="{Binding DataContext.SelectedViewModel.ValidationErrors, Converter={StaticResource EmptyListConverter}, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"                                                    
+														/>
+                    						<ListView x:Name="ValidationListView" Grid.Row="1"
+                    							IsHitTestVisible="False" Background="White" BorderBrush="{x:Null}" 
+                    							ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+                    							ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    							FontSize="{DynamicResource DefaultTextSize}" 
+                    							FontFamily="{DynamicResource APLDefault}"
+                    							ItemsSource="{Binding DataContext.SelectedViewModel.ValidationErrors, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"                                           
+                    							ItemTemplate="{StaticResource validationErrorItemTemplate}" Foreground="Red"
+                    							Visibility="{Binding DataContext.SelectedViewModel.ValidationErrors, Converter={StaticResource EmptyListConverter}, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}"
+														/>                             
+                    						<ListView x:Name="ErrorsListView" Grid.Row="2"
+                    							Background="#FFFFFFFF" BorderBrush="{x:Null}" Foreground="Red"
+                    							ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+                    							ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    							FontSize="{DynamicResource DefaultTextSize}" 
+                    							FontFamily="{DynamicResource APLDefault}"
+                    							Style="{StaticResource ActiveToggleStyle}" IsHitTestVisible="False"                
+                    							ItemsSource="{Binding Errors}" ItemTemplate="{DynamicResource error}"                                            		
+                    							Visibility="{Binding Errors, Converter={StaticResource EmptyListConverter}}"													 
+													/>
+                    						<Label x:Name="AdvisiorsLabel" 
+                    							Content="Advisors" FontWeight="Medium" Background="White"
+                    							HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                    							FontSize="{DynamicResource DefaultLabelSize}" 
+                    							FontFamily="{DynamicResource APLDefault}"									 
+													/>
+                    						<ListView x:Name="AdvisorsListView" Grid.Row="3"
+                    							IsHitTestVisible="False" Background="White" BorderBrush="{x:Null}"                                            		 
+                    							ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+                    							ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    							FontSize="{DynamicResource DefaultTextSize}" 
+                    							FontFamily="{DynamicResource APLDefault}"
+                    							ItemsSource="{Binding Advisors}" ItemTemplate="{DynamicResource advisor}"                                            		
+                                                    />                                                
+                    					</StackPanel>-->
+                    				</Expander>
+                    			</DataTemplate>
+                    		</ItemsControl.ItemTemplate>
+                    	</ItemsControl>
+                    </telerik:RadPane>
+				</telerik:RadPaneGroup>
+			</telerik:RadSplitContainer>
+		</telerik:RadDocking>
+        <!--ContentTemplate="{DynamicResource APLHeaderNavigation}"-->
+		<Grid x:Name="HeaderNavigation">
+			<ContentControl x:Name="HeaderNavigationContent" 
+				Content="{Binding}" 
+				ContentTemplate="{DynamicResource APLHeaderNavigation}"
+				/>
+		</Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,401 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+	xmlns:System="clr-namespace:System;assembly=mscorlib"
+	xmlns:Controls="clr-namespace:APLPromoter.UI.WPF.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ext="clr-namespace:APLPromoter.UI.Wpf.Extensions"
+    xmlns:viewModel="clr-namespace:APLPromoter.UI.Wpf.ViewModel"
+    xmlns:ent="clr-namespace:APLPromoter.Client.Entity"
+    xmlns:entity="clr-namespace:APLPromoter.Client.Entity;assembly=APLPromoter.Client.Entity"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:behaviours="clr-namespace:APLPromoter.UI.Wpf.Behaviors"
+	xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+	xmlns:views="clr-namespace:APLPromoter.UI.Wpf.Views"
+	mc:Ignorable="d"
+    >          
+    
+	<!-- Resource dictionary entries should be defined here. -->
+
+    
+    <behaviours:SelectAllTextOnFocusBehavior x:Key="SelectAllBehavior">
+    </behaviours:SelectAllTextOnFocusBehavior>
+    
+	<!--RadControlTemplates-->
+	<Style x:Key="ActiveExpanderStyle" TargetType="Expander">
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding IsActive}" Value="True">
+				<Setter Property="BorderBrush" Value="Red"/>
+				<Setter Property="BorderThickness" Value="10"/>
+				<Setter Property="Margin" Value="4"/>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+	      
+	<Style x:Key="InActiveExpanderStyle" TargetType="Expander">
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding IsActive}" Value="False">
+				<Setter Property="BorderBrush" Value="Blue"/>
+				<Setter Property="BorderThickness" Value="1"/>
+				<Setter Property="Opacity" Value=".04"/>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+	      
+    <Style x:Key="ActiveToggleStyle" TargetType="ListView">
+        <Style.Triggers>
+			
+            <DataTrigger Binding="{Binding IsActive}" Value="False">
+			 	<Setter Property="BorderBrush" Value="{x:Null}"/>	
+                <Setter Property="Background" Value="{x:Null}"/>
+                <Setter Property="FontSize" Value="{DynamicResource DefaultTextSize}"/>
+				<Setter Property="FontFamily" Value="{DynamicResource APLDefault}"/>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding IsActive}" Value="True">
+			 	<Setter Property="BorderBrush" Value="{x:Null}"/>	
+                <Setter Property="Background" Value="{x:Null}"/>
+                <Setter Property="FontSize" Value="{DynamicResource DefaultTextSize}"/>
+				<Setter Property="FontFamily" Value="{DynamicResource APLDefault}"/>
+            </DataTrigger>
+
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ErrorsListViewStyle" TargetType="{x:Type ListView}">
+    	<Style.Triggers>
+			
+    		<DataTrigger Binding="{Binding IsActive}" Value="False">
+			 	<Setter Property="BorderBrush" Value="{x:Null}"/>	
+                <Setter Property="Background" Value="{x:Null}"/>
+    			<Setter Property="FontSize" Value="{DynamicResource DefaultTextSize}"/>
+				<Setter Property="FontFamily" Value="{DynamicResource APLDefault}"/>
+    		</DataTrigger>
+
+    		<DataTrigger Binding="{Binding IsActive}" Value="True">
+			 	<Setter Property="BorderBrush" Value="{x:Null}"/>	
+                <Setter Property="Background" Value="{x:Null}"/>
+    			<Setter Property="FontSize" Value="{DynamicResource DefaultTextSize}"/>
+				<Setter Property="FontFamily" Value="{DynamicResource APLDefault}"/>
+    		</DataTrigger>
+
+    	</Style.Triggers>
+    </Style>
+
+ <Style x:Key="AdvisorsListViewStyle" TargetType="ListView">
+        <Style.Triggers>		
+            <DataTrigger Binding="{Binding IsActive}" Value="False">
+			 	<Setter Property="BorderBrush" Value="{x:Null}"/>	
+                <Setter Property="Background" Value="{x:Null}"/>
+                <Setter Property="FontSize" Value="{DynamicResource DefaultTextSize}"/>
+				<Setter Property="FontFamily" Value="{DynamicResource APLDefault}"/>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding IsActive}" Value="True">
+				<Setter Property="BorderBrush" Value="{x:Null}"/>				
+                <Setter Property="Background" Value="{x:Null}"/>
+                <Setter Property="FontSize" Value="{DynamicResource DefaultTextSize}"/>
+				<Setter Property="FontFamily" Value="{DynamicResource APLDefault}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ActiveTextBlockToggleStyle" TargetType="TextBlock">
+        <Style.Triggers>			
+            <DataTrigger Binding="{Binding IsActive}" Value="False">
+				<Setter Property="Width" Value="Auto"/>
+				<Setter Property="Height" Value="Auto"/>
+                <Setter Property="FontSize" Value="{DynamicResource DefaultTextSize}"/>
+				<Setter Property="FontFamily" Value="{DynamicResource APLDefault}"/>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding IsActive}" Value="True">
+				<Setter Property="Width" Value="Auto"/>
+				<Setter Property="Height" Value="Auto"/>
+                <Setter Property="FontSize" Value="{DynamicResource DefaultTextSize}"/>
+				<Setter Property="FontFamily" Value="{DynamicResource APLDefault}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="CaptionTextBlockToggleStyle" TargetType="TextBlock">
+        <Style.Triggers>			
+            <DataTrigger Binding="{Binding IsActive}" Value="False">
+				<Setter Property="Width" Value="Auto"/>
+				<Setter Property="Height" Value="Auto"/>				
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Foreground" Value="Black"/>            
+			</DataTrigger>
+
+            <DataTrigger Binding="{Binding IsActive}" Value="True">
+				<Setter Property="Width" Value="Auto"/>
+				<Setter Property="Height" Value="Auto"/>				
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="FontSize" Value="12"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+	<DataTemplate x:Key="LoginDataTemplate" DataType="viewModel:LoginViewModel">
+		<Grid x:Name="LayoutRoot" d:DesignHeight="768" Margin="450,0,0,0"
+			>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+
+			<Grid x:Name="UserNameGrid" 
+				HorizontalAlignment="Stretch" 
+				VerticalAlignment="Stretch"
+				>
+                <!-- trade off focus -or- show watermark -->
+                <!--FocusManager.FocusedElement="{Binding ElementName=userName}"-->
+                <TextBox x:Name="userName" Grid.Column="0" Grid.Row="0" TabIndex="0" 
+                         behaviours:TextBoxFocusBehavior.IsWatermarkEnabled="true" 
+                    Text="{Binding LoginName, UpdateSourceTrigger=PropertyChanged}"
+					Padding="1" Margin="4,0" Width="440" Height="22"
+					Style="{DynamicResource userTextBoxStyle}"
+					BorderBrush="{DynamicResource ButtonDarkForeground}" 
+					Background="{DynamicResource ButtonNormalBackground}" VerticalAlignment="Stretch" 
+					Foreground="{DynamicResource ButtonDarkForeground}"
+					FontFamily="{DynamicResource APLDefault}" 
+					FontSize="{DynamicResource DefaultTextSize}" CaretBrush="#FF0F154D" ForceCursor="True" 	>
+                     <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding LoginCommand}" Key="Return" />
+                    </TextBox.InputBindings>
+                                    
+                    <i:Interaction.Behaviors>
+                        <behaviours:SelectAllTextOnFocusBehavior></behaviours:SelectAllTextOnFocusBehavior>
+                    </i:Interaction.Behaviors>                    
+                </TextBox>
+			</Grid>
+
+			<Grid x:Name="UserValidationGrid" Grid.Column="1" 
+				HorizontalAlignment="Stretch" Height="Auto" 
+				VerticalAlignment="Stretch" Width="Auto" 
+				/>
+            <Grid x:Name="PasswordGrid"  Grid.Row="1"
+				HorizontalAlignment="Stretch" 
+				VerticalAlignment="Stretch" Margin="0,2"
+				>
+                <PasswordBox x:Name="password" Grid.Row="0"  Grid.Column="0" TabIndex="1"
+                    ext:PasswordBoxAssistant.BindPassword="true"
+                    ext:PasswordBoxAssistant.BoundPassword="{Binding Password, Mode=TwoWay}"
+                    behaviours:PasswordBoxFocusBehavior.IsWatermarkEnabled="true"     
+					VerticalContentAlignment="Center" VerticalAlignment="Stretch" 
+					HorizontalContentAlignment="Left" PasswordChar="•" 
+					FontFamily="{DynamicResource APLDefault}" 
+					FontSize="{DynamicResource DefaultTextSize}" 
+					Foreground="{DynamicResource ButtonDarkForeground}" 
+					Background="{DynamicResource ButtonNormalBackground}" 
+					BorderBrush="{DynamicResource ButtonDarkForeground}" 
+					Width="440" SelectionOpacity="1" CaretBrush="#FF0F154D" Height="22" ForceCursor="True"
+					Style="{DynamicResource PasswordBoxStyle}"
+					>
+                    <PasswordBox.InputBindings>
+                        <KeyBinding Command="{Binding LoginCommand}" Key="Return" />
+                    </PasswordBox.InputBindings>
+                </PasswordBox>
+            </Grid>
+			<Grid x:Name="PasswordSettingsGrid" Grid.Column="1" Grid.Row="1" 
+				HorizontalAlignment="Stretch" 
+				VerticalAlignment="Stretch"
+				>
+				<Controls:ImageToggleButton x:Name="Passwordsetting"
+                    TabIndex="2"
+                    Command="{Binding ToggleChangePasswordCommand}"
+                    CommandParameter="{Binding Visibility, ElementName=PasswordChangeGrid}"
+					Style="{DynamicResource ImageToggleButtonStyle}" 
+					ImageSourceActive="/APLPromoter.UI.Wpf;component/Resources/Images/Password/Lock-Open.png" 
+					ImageSourceActiveDisabled="/APLPromoter.UI.Wpf;component/Resources/Images/Password/Lock-Closed.png"
+					ImageSourceActiveHover="/APLPromoter.UI.Wpf;component/Resources/Images/Password/Lock-Closed.png" 
+					ImageSourceActivePressed="/APLPromoter.UI.Wpf;component/Resources/Images/Password/Lock-Closed.png" 
+					ImageSourceIdle="/APLPromoter.UI.Wpf;component/Resources/Images/Password/Lock-Closed.png" 
+					ImageSourceIdleDisabled="/APLPromoter.UI.Wpf;component/Resources/Images/Password/Lock-Closed.png" 
+					ImageSourceIdleHover="/APLPromoter.UI.Wpf;component/Resources/Images/Password/Lock-Closed.png" 
+					ImageSourceIdlePressed="/APLPromoter.UI.Wpf;component/Resources/Images/Password/Lock-Closed.png" 
+					Width="25" Height="25" 
+					ToolTip="ChangePassword"
+					/>	
+			</Grid>
+
+			<Grid x:Name="PasswordChangeGrid" Grid.Row="2"
+				HorizontalAlignment="Stretch" Height="Auto" 
+				VerticalAlignment="Stretch" Width="Auto" Background="{x:Null}" 
+                Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Passwordsetting}"                  
+				>
+				
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition />
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+
+                <PasswordBox x:Name="NewPassword" Grid.Column="1"
+                    TabIndex="3" Style="{DynamicResource NewPasswordBoxStyle}"
+                    ext:PasswordBoxAssistant.BindPassword="true"
+                    ext:PasswordBoxAssistant.BoundPassword="{Binding NewPassword, Mode=TwoWay}"
+                    behaviours:PasswordBoxFocusBehavior.IsWatermarkEnabled="true"     
+					HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 					 
+					Background="{DynamicResource ButtonNormalBackground}" 
+					FontFamily="{DynamicResource APLDefault}" 
+					FontSize="{DynamicResource DefaultTextSize}" 
+					Foreground="{DynamicResource ButtonDarkForeground}" 
+					Margin="0,0,4,0" Padding="1" BorderBrush="{DynamicResource ButtonDarkForeground}" 
+					Width="160" Height="22" CaretBrush="#FF0F154D" PasswordChar="•"
+					>
+                    <PasswordBox.InputBindings>
+                        <KeyBinding Command="{Binding ChangePasswordCommand}" Key="Return" />
+                    </PasswordBox.InputBindings>
+                </PasswordBox>
+
+                <PasswordBox x:Name="Confirm" Grid.Column="2"
+                    TabIndex="4" Style="{DynamicResource VerifyPasswordBoxStyle}"
+					ext:PasswordBoxAssistant.BindPassword="true"
+					ext:PasswordBoxAssistant.BoundPassword="{Binding ConfirmPassword, Mode=TwoWay}"
+                    behaviours:PasswordBoxFocusBehavior.IsWatermarkEnabled="true"     
+					HorizontalAlignment="Stretch" VerticalAlignment="Stretch"					   
+					FontFamily="{DynamicResource APLDefault}" 
+					FontSize="{DynamicResource DefaultTextSize}" 
+					Foreground="{DynamicResource ButtonDarkForeground}" 					
+					Background="{DynamicResource ButtonNormalBackground}" BorderBrush="{DynamicResource ButtonDarkForeground}"
+					Margin="0,0,4,0"  Width="160" Height="22" CaretBrush="#FF0F154D" PasswordChar="•"
+					>
+                    <PasswordBox.InputBindings>
+                        <KeyBinding Command="{Binding ChangePasswordCommand}" Key="Return" />
+                    </PasswordBox.InputBindings>
+                </PasswordBox>
+            </Grid>
+
+			<Grid x:Name="PasswordValidationGrid" Grid.Row="2" Grid.Column="1"
+				HorizontalAlignment="Stretch" Height="Auto" 
+				VerticalAlignment="Stretch" Width="Auto" 
+				/>          
+			<Grid x:Name="LoginAccessorGrid" Grid.Row="3"
+				HorizontalAlignment="Right" Height="Auto" 
+				VerticalAlignment="Stretch" Width="Auto" Margin="0,4,4,4" 
+				>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+                
+				<Grid x:Name="ChangePasswordGrid" VerticalAlignment="Stretch" 
+					Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter},ElementName=Passwordsetting}"
+					>
+                    <Controls:ImageButton x:Name="ChangePassword" TabIndex="5"
+						Command="{Binding ChangePasswordCommand}" 
+						Style="{DynamicResource ImageButtonStyle}" 
+						ImageSourceActive="/APLPromoter.UI.Wpf;component/Resources/Images/BlankButtons/ArcticLogin.png" 
+						ImageSourceDisabled="/APLPromoter.UI.Wpf;component/Resources/Images/BlankButtons/ArcticLoginDisabled.png" 
+						ImageSourceHover="/APLPromoter.UI.Wpf;component/Resources/Images/BlankButtons/ArcticLoginDisabled.png" 
+						ImageSourceIdle="/APLPromoter.UI.Wpf;component/Resources/Images/BlankButtons/ArcticLogin.png" 
+						ImageSourcePressed="/APLPromoter.UI.Wpf;component/Resources/Images/BlankButtons/ArcticLogin.png" 
+						Height="27" Width="120" Foreground="{DynamicResource LoginLabelTextBrush}" Margin="0" 
+						>
+						<Grid Height="Auto" RenderTransformOrigin="0.5,0.5">
+							<Grid.RenderTransform>
+								<TransformGroup>
+									<ScaleTransform/>
+									<SkewTransform/>
+									<RotateTransform/>
+									<TranslateTransform X="0"/>
+								</TransformGroup>
+							</Grid.RenderTransform>
+							<TextBlock x:Name="ChangePasswordTextBlock" 
+								HorizontalAlignment="Stretch" TextWrapping="Wrap" 
+								Text="Change Password" VerticalAlignment="Stretch" 
+								Foreground="Black"
+								FontSize="{DynamicResource DefaultLabelSize}" 
+								/>
+						</Grid>
+					</Controls:ImageButton>
+				</Grid>
+
+				<Grid x:Name="LoginGrid" Grid.Column="1"
+					Height="Auto" VerticalAlignment="Stretch" 
+					Width="Auto"  Margin="0"
+					>
+					<Button x:Name="xlogin" Width="70" Height="25"
+						Command="{Binding LoginCommand}" TabIndex="6"
+						Visibility="{Binding IsChecked, Converter={StaticResource BooleanToInvisibilityConverter},ElementName=Passwordsetting}" 
+						ToolTip="User Login" Background="{Binding DataContext.UserSettings.HeaderBrush,
+							RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type views:MainView}},
+							UpdateSourceTrigger=PropertyChanged}" 
+						BorderBrush="{Binding DataContext.UserSettings.BorderBrush,
+							RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type views:MainView}},
+							UpdateSourceTrigger=PropertyChanged}"
+							>
+						<TextBlock x:Name="LoginTextBlock" Grid.Column="0" 
+							TextWrapping="Wrap" Text="Login"
+							VerticalAlignment="Stretch" ToolTip="User Login"
+							FontSize="{DynamicResource DefaultLabelSize}" 								  								
+							FontFamily="{DynamicResource APLDefault}"
+							Foreground="{Binding DataContext.UserSettings.TextBrush,
+								RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type views:MainView}},
+								UpdateSourceTrigger=PropertyChanged}"
+								/>
+					</Button>
+				</Grid>                
+			</Grid>
+            
+			<Grid x:Name="VersionGrid" Grid.Row="4"  
+				 VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+				>
+				<TextBlock x:Name="Version" 
+					HorizontalAlignment="Stretch" TextWrapping="Wrap" 
+					Text="{Binding Version, FallbackValue= Promoter 4.0}" VerticalAlignment="Bottom" 
+					Foreground="{Binding DataContext.UserSettings.TextBrush,
+					RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type views:MainView}},
+					UpdateSourceTrigger=PropertyChanged}" Margin="0,0,2,0"
+					FontSize="{DynamicResource DefaultTextSize}"
+					FontFamily="{DynamicResource APLDefault}"
+					/>
+			</Grid>			
+		</Grid>
+		<DataTemplate.Triggers>
+			<EventTrigger RoutedEvent="Mouse.MouseDown" SourceName="Passwordsetting"/>
+			<Trigger Property="IsChecked" Value="True" SourceName="Passwordsetting"/>
+		</DataTemplate.Triggers>
+	</DataTemplate>
+
+    <DataTemplate x:Key="error" DataType="viewModel:LoginViewModel">
+        <Border x:Name="ErrorMessageBorder" 
+				BorderThickness="1" CornerRadius="2" 
+				BorderBrush="{x:Null}" 
+				>
+    		<TextBlock x:Name="ErrorMessageTextBlock"
+				Text="{Binding Message, FallbackValue= ErrorMessage}" 
+				TextTrimming="WordEllipsis" Margin="2" TextWrapping="Wrap" 
+				VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="Normal"
+				FontFamily="{DynamicResource APLDefault}" FontSize="{DynamicResource DefaultTextSize}"				
+				/>
+    	</Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="advisor" DataType="viewModel:LoginViewModel">
+        <Border x:Name="AdvisorMessageBorder"
+				Height="Auto" Width="Auto" CornerRadius="2" BorderThickness="1" 
+				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+				>            
+    		<TextBlock x:Name="AdvisorMessageTextBlock" 
+				Text="{Binding Message, FallbackValue= Advisor Messge}" 
+				TextWrapping="Wrap" Margin="2" FontFamily="{DynamicResource APLDefault}"
+				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+				FontSize="{DynamicResource DefaultTextSize}"
+				/>            
+    	</Border>
+    </DataTemplate>
+
+</ResourceDictionary>
